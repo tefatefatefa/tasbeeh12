@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسبيح - عداد الأذكار</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <i class="fas fa-mosque"></i>
+                <h1>تسبيح</h1>
+            </div>
+            <p class="subtitle">عداد الأذكار اليومية</p>
+        </header>
+
+        <div class="counter-container">
+            <div class="counter-display">
+                <span id="counter">0</span>
+            </div>
+            <div class="counter-controls">
+                <button id="increment" class="btn">
+                    <i class="fas fa-plus"></i>
+                </button>
+                <button id="reset" class="btn">
+                    <i class="fas fa-redo"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="azkar-buttons">
+            <button class="azkar-btn active" data-dhikr="سبحان الله">
+                سبحان الله
+            </button>
+            <button class="azkar-btn" data-dhikr="الحمد لله">
+                الحمد لله
+            </button>
+            <button class="azkar-btn" data-dhikr="الله أكبر">
+                الله أكبر
+            </button>
+            <button class="azkar-btn" data-dhikr="لا إله إلا الله">
+                لا إله إلا الله
+            </button>
+            <button class="azkar-btn" data-dhikr="أستغفر الله">
+                أستغفر الله
+            </button>
+            <button class="azkar-btn" data-dhikr="لا حول ولا قوة إلا بالله">
+                لا حول ولا قوة إلا بالله
+            </button>
+        </div>
+
+        <div class="progress-container">
+            <div class="progress-info">
+                <span id="current-dhikr">سبحان الله</span>
+                <span id="progress-count">0/100</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 0%"></div>
+            </div>
+        </div>
+
+        <div class="stats">
+            <div class="stat-box">
+                <i class="fas fa-calendar-day"></i>
+                <span id="today-count">0</span>
+                <p>اليوم</p>
+            </div>
+            <div class="stat-box">
+                <i class="fas fa-calendar-week"></i>
+                <span id="week-count">0</span>
+                <p>هذا الأسبوع</p>
+            </div>
+            <div class="stat-box">
+                <i class="fas fa-calendar-alt"></i>
+                <span id="total-count">0</span>
+                <p>المجموع</p>
+            </div>
+        </div>
+
+        <div class="settings">
+            <h2><i class="fas fa-cog"></i> الإعدادات</h2>
+            <div class="setting-option">
+                <label for="target-input">الهدف اليومي:</label>
+                <input type="number" id="target-input" value="100" min="1">
+            </div>
+            <div class="setting-option">
+                <label for="sound-toggle">صوت العد:</label>
+                <label class="switch">
+                    <input type="checkbox" id="sound-toggle" checked>
+                    <span class="slider round"></span>
+                </label>
+            </div>
+            <div class="setting-option">
+                <label for="vibration-toggle">اهتزاز العد:</label>
+                <label class="switch">
+                    <input type="checkbox" id="vibration-toggle" checked>
+                    <span class="slider round"></span>
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>تسبيح - ذكر الله يطمئن القلوب</p>
+        <p>© 2023 جميع الحقوق محفوظة</p>
+    </footer>
+
+    <audio id="click-sound" src="click.wav" preload="auto"></audio>
+
+    <script src="script.js"></script>
+</body>
+</html>
