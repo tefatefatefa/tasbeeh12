@@ -1,306 +1,56 @@
-:root {
-    --primary-color: #2ca4ab;
-    --primary-dark: #1e7a7f;
-    --secondary-color: #f8b400;
-    --light-color: #f5f5f5;
-    --dark-color: #333;
-    --success-color: #4CAF50;
-    --bg-color: #f9f9f9;
-    --card-bg: #fff;
-    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+// السكربت البسيط لتشغيل العداد
+
+const counter = document.getElementById('counter');
+const incrementBtn = document.getElementById('increment');
+const resetBtn = document.getElementById('reset');
+const clickSound = document.getElementById('click-sound');
+const currentDhikr = document.getElementById('current-dhikr');
+const progressCount = document.getElementById('progress-count');
+const progressFill = document.querySelector('.progress-fill');
+const targetInput = document.getElementById('target-input');
+const azkarButtons = document.querySelectorAll('.azkar-btn');
+
+let count = 0;
+let todayCount = 0;
+let totalCount = 0;
+let target = parseInt(targetInput.value);
+
+function updateDisplay() {
+    counter.textContent = count;
+    progressCount.textContent = `${count}/${target}`;
+    progressFill.style.width = `${Math.min((count / target) * 100, 100)}%`;
 }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Tajawal', sans-serif;
-}
-
-body {
-    background-color: var(--bg-color);
-    color: var(--dark-color);
-    line-height: 1.6;
-    direction: rtl;
-}
-
-.container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-}
-
-header {
-    text-align: center;
-    margin-bottom: 30px;
-}
-
-.logo {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 15px;
-    margin-bottom: 10px;
-}
-
-.logo i {
-    font-size: 2.5rem;
-    color: var(--primary-color);
-}
-
-.logo h1 {
-    font-size: 2.5rem;
-    color: var(--primary-color);
-    font-weight: 700;
-}
-
-.subtitle {
-    color: var(--primary-dark);
-    font-size: 1.2rem;
-}
-
-.counter-container {
-    background-color: var(--card-bg);
-    border-radius: 15px;
-    padding: 20px;
-    margin-bottom: 20px;
-    box-shadow: var(--shadow);
-    text-align: center;
-}
-
-.counter-display {
-    font-size: 5rem;
-    font-weight: bold;
-    color: var(--primary-color);
-    margin: 20px 0;
-}
-
-.counter-controls {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-}
-
-.btn {
-    background-color: var(--primary-color);
-    color: white;
-    border: none;
-    border-radius: 50%;
-    width: 60px;
-    height: 60px;
-    font-size: 1.5rem;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-    box-shadow: var(--shadow);
-}
-
-.btn:hover {
-    background-color: var(--primary-dark);
-    transform: translateY(-3px);
-}
-
-.btn:active {
-    transform: translateY(1px);
-}
-
-.azkar-buttons {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
-    margin-bottom: 20px;
-}
-
-.azkar-btn {
-    background-color: var(--card-bg);
-    border: 2px solid var(--primary-color);
-    color: var(--primary-color);
-    padding: 15px;
-    border-radius: 10px;
-    font-size: 1.1rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: var(--shadow);
-}
-
-.azkar-btn:hover {
-    background-color: var(--primary-color);
-    color: white;
-}
-
-.azkar-btn.active {
-    background-color: var(--primary-color);
-    color: white;
-}
-
-.progress-container {
-    background-color: var(--card-bg);
-    border-radius: 15px;
-    padding: 20px;
-    margin-bottom: 20px;
-    box-shadow: var(--shadow);
-}
-
-.progress-info {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
-    font-size: 1.1rem;
-}
-
-.progress-bar {
-    height: 20px;
-    background-color: #e0e0e0;
-    border-radius: 10px;
-    overflow: hidden;
-}
-
-.progress-fill {
-    height: 100%;
-    background-color: var(--primary-color);
-    width: 0%;
-    transition: width 0.5s ease;
-    border-radius: 10px;
-}
-
-.stats {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 15px;
-    margin-bottom: 20px;
-}
-
-.stat-box {
-    background-color: var(--card-bg);
-    border-radius: 15px;
-    padding: 15px;
-    text-align: center;
-    box-shadow: var(--shadow);
-}
-
-.stat-box i {
-    font-size: 2rem;
-    color: var(--primary-color);
-    margin-bottom: 10px;
-}
-
-.stat-box span {
-    display: block;
-    font-size: 1.8rem;
-    font-weight: bold;
-    color: var(--primary-dark);
-    margin-bottom: 5px;
-}
-
-.stat-box p {
-    color: var(--dark-color);
-    font-size: 0.9rem;
-}
-
-.settings {
-    background-color: var(--card-bg);
-    border-radius: 15px;
-    padding: 20px;
-    margin-bottom: 20px;
-    box-shadow: var(--shadow);
-}
-
-.settings h2 {
-    color: var(--primary-dark);
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.settings h2 i {
-    font-size: 1.5rem;
-}
-
-.setting-option {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 15px;
-}
-
-.setting-option label {
-    font-size: 1.1rem;
-}
-
-.setting-option input[type="number"] {
-    width: 80px;
-    padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    text-align: center;
-}
-
-.switch {
-    position: relative;
-    display: inline-block;
-    width: 60px;
-    height: 34px;
-}
-
-.switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-}
-
-.slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #ccc;
-    transition: .4s;
-    border-radius: 34px;
-}
-
-.slider:before {
-    position: absolute;
-    content: "";
-    height: 26px;
-    width: 26px;
-    left: 4px;
-    bottom: 4px;
-    background-color: white;
-    transition: .4s;
-    border-radius: 50%;
-}
-
-input:checked + .slider {
-    background-color: var(--primary-color);
-}
-
-input:checked + .slider:before {
-    transform: translateX(26px);
-}
-
-footer {
-    text-align: center;
-    padding: 20px;
-    color: var(--primary-dark);
-    font-size: 0.9rem;
-}
-
-@media (max-width: 768px) {
-    .azkar-buttons {
-        grid-template-columns: 1fr;
+incrementBtn.addEventListener('click', () => {
+    count++;
+    todayCount++;
+    totalCount++;
+    updateDisplay();
+    if (document.getElementById('sound-toggle').checked && clickSound) {
+        clickSound.play();
     }
-    
-    .stats {
-        grid-template-columns: 1fr;
+    if (document.getElementById('vibration-toggle').checked) {
+        navigator.vibrate(100);
     }
-    
-    .counter-display {
-        font-size: 4rem;
-    }
-}
+});
+
+resetBtn.addEventListener('click', () => {
+    count = 0;
+    updateDisplay();
+});
+
+targetInput.addEventListener('change', () => {
+    target = parseInt(targetInput.value) || 100;
+    updateDisplay();
+});
+
+azkarButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+        azkarButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentDhikr.textContent = btn.dataset.dhikr;
+        resetBtn.click();
+    });
+});
+
+updateDisplay();
